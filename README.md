@@ -1,1 +1,0 @@
-Check Event Zabbix WebDriver
