@@ -18,11 +18,16 @@ class LogFile {
         }
     }
 
-    private static String parsLog(String message) {
+    private String parsLog(String message) {
         StringBuilder sb = new StringBuilder(message);
-        if (sb.indexOf("Build") != -1)
-        sb.delete(sb.indexOf("For"), sb.length());
+        if (sb.indexOf("Build")  != -1) {
+            sb.delete(compareIndexOfSB(sb.indexOf("Build"), sb.indexOf("For")), sb.length());
+        }
 
         return sb + "\n";
+    }
+
+    private int compareIndexOfSB(int value1, int value2){
+        return value1 < value2 ? value1:value2;
     }
 }
