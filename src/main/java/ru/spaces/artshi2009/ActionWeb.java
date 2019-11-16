@@ -6,8 +6,6 @@ import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,10 +43,10 @@ class ActionWeb {
                 log.logFile("Непредвиденная ошибка: \n" +
                         Throwables.getStackTraceAsString(ex));
                 ex.printStackTrace();
-            } finally {
-                driver.quit();
             }
         }
+
+        driver.quit();
     }
 
     private void closingAlert(WebDriver driver, int waitRun) throws InterruptedException {
