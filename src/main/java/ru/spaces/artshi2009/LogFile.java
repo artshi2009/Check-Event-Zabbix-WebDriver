@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 class LogFile {
     private GregorianCalendar calendar = new GregorianCalendar();
 
-    void logFile(String message) {
+    void writeFile(String message) {
         try (FileWriter writer = new FileWriter("Report.log", true)) {
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write("[Время события " + calendar.getTime() + "]: " + parsLog(message));
@@ -20,14 +20,14 @@ class LogFile {
 
     private String parsLog(String message) {
         StringBuilder sb = new StringBuilder(message);
-        if (sb.indexOf("Build")  != -1) {
+        if (sb.indexOf("Build") != -1) {
             sb.delete(compareIndexOfSB(sb.indexOf("Build"), sb.indexOf("For")), sb.length());
         }
 
         return sb + "\n";
     }
 
-    private int compareIndexOfSB(int value1, int value2){
-        return value1 < value2 ? value1:value2;
+    private int compareIndexOfSB(int value1, int value2) {
+        return value1 < value2 ? value1 : value2;
     }
 }
