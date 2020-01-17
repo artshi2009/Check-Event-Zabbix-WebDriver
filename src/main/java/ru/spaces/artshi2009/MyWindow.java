@@ -7,8 +7,8 @@ import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
 
 class MyWindow extends JFrame {
-    private JButton[] buttons = {new JButton("Подтвердить check event Zabbix"), new JButton(Params.getNameButton()), new JButton("Exit")};
-    private JTextArea printText = new DrawImage("ВНИМАНИЕ!");
+    private JButton[] buttons = {new JButton("Acknowledge alert"), new JButton(Params.getNameButton()), new JButton("Exit")};
+    private JTextArea printText = new DrawImage("Warning!");
     private Font font = new Font("TimesRoman", Font.BOLD, 30);
     private PlayerSound player = new PlayerSound();
     private int widthWindow = MyScreen.SCREEN_WIDTH / 2;
@@ -17,21 +17,21 @@ class MyWindow extends JFrame {
     private ActionWeb drv = new ActionWeb();
 
     MyWindow() {
-        System.out.println(MyScreen.SCREEN_WIDTH + " x " + MyScreen.SCREEN_HEIGHT);
+        System.out.println("\n" + MyScreen.SCREEN_WIDTH + " x " + MyScreen.SCREEN_HEIGHT);//debug
 
         LocalDateTime time = LocalDateTime.now();
         double ms = (time.getMinute() + time.getSecond() * 0.0167) * 60000;
         threadOfRunForm(ms);
-        }
+    }
 
     private void threadOfRunForm(double ms) {
-        long parsMs;
-        parsMs = calculateTime(ms);
+
+        long parsMs = calculateTime(ms);
 
         new Thread(() -> {
             try {
-                System.out.println("Текущее значение минут в мс: " + ms + "; в мин: " + ms / 60000); // debug
-                System.out.println("Время до создания формы (в мс): " + parsMs + "; в мин: " + parsMs / 60000);
+                System.out.println("The current value of minutes (ms): " + ms + "; min: " + ms / 60000);//debug
+                System.out.println("Time to form creation (ms): " + parsMs + "; min: " + parsMs / 60000 + "\n");
                 Thread.sleep(parsMs);
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
@@ -44,7 +44,7 @@ class MyWindow extends JFrame {
                 setVisible(true);
             //end
             try {
-                Thread.sleep(3000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -152,7 +152,7 @@ class MyWindow extends JFrame {
         printText.setForeground(Color.BLACK);
         printText.setBackground(new Color(1,1,1, (float) 0.01));
         printText.setFont(font);
-        printText.append("\n Нажми на кнопку <<Подтвердить check event Zabbix>>,\n для автоматического подтверждения\n <<check event monitoring>> и проверь наличие аллертов важности critical.");
+        printText.append("\n Нажми на кнопку <<Acknowledge alert>>,\n для автоматического подтверждения\n <<check event monitoring>> и проверь наличие аллертов важности critical.");
 
         int shiftButtonsY = 0;
 
